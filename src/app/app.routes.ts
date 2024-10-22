@@ -1,4 +1,6 @@
-import { Routes } from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { HomeComponent } from './components/home/home.component';
 import { CitiesComponent } from './components/cities/cities.component';
 import { WeatherComponent } from './components/weather/weather.component';
@@ -15,3 +17,8 @@ export const routes: Routes = [
     {path: '404/:message', component: Error404Component},
     {path: '**', redirectTo: '/404', pathMatch: 'full'}
 ];
+@NgModule({
+    imports: [RouterModule.forRoot(routes)],
+    providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
+    exports: [RouterModule]
+})
